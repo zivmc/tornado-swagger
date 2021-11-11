@@ -1,3 +1,13 @@
+Notice
+===============
+
+Updated to use openapi 3.0 (instead of swagger 2.0), doc strings should follow
+[Swagger Openapi Spec](https://swagger.io/docs/specification/about/). Lookup
+`examples/model_declaration.py`.
+
+Original README
+===============
+
 tornado-swagger
 ===============
 

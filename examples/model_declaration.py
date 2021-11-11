@@ -14,15 +14,15 @@ class PostsHandler(tornado.web.RequestHandler):
         - Posts
         summary: List posts
         description: List all posts in feed
-        produces:
-        - application/json
         responses:
             200:
               description: list of posts
-              schema:
-                type: array
-                items:
-                  $ref: '#/definitions/PostModel'
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PostModel'
         """
 
     def post(self):
@@ -32,15 +32,13 @@ class PostsHandler(tornado.web.RequestHandler):
         - Posts
         summary: Add posts
         description: Add posts in feed
-        produces:
-        - application/json
-        parameters:
-        -   in: body
-            name: body
-            description: post data
-            required: true
-            schema:
-              $ref: '#/definitions/PostModel'
+        requestBody:
+          description: post data
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostModel'
         """
 
 
@@ -52,8 +50,6 @@ class PostsDetailsHandler(tornado.web.RequestHandler):
         - Posts
         summary: Get posts details
         description: posts full version
-        produces:
-        - application/json
         parameters:
         -   name: posts_id
             in: path
@@ -63,8 +59,12 @@ class PostsDetailsHandler(tornado.web.RequestHandler):
         responses:
             200:
               description: list of posts
-              schema:
-                $ref: '#/definitions/PostModel'
+              content:
+                application/json:
+                  schema:
+                    type: array
+                    items:
+                      $ref: '#/components/schemas/PostModel'
         """
 
     def patch(self, posts_id):
@@ -74,20 +74,19 @@ class PostsDetailsHandler(tornado.web.RequestHandler):
         - Posts
         summary: Edit posts
         description: Edit posts details
-        produces:
-        - application/json
         parameters:
         -   name: posts_id
             in: path
             description: ID of post to edit
             required: true
             type: string
-        -   in: body
-            name: body
-            description: post data
-            required: true
-            schema:
-              $ref: '#/definitions/PostModel'
+        requestBody:
+          description: post data
+          required: true
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/PostModel'
         """
 
     def delete(self, posts_id):
@@ -97,8 +96,6 @@ class PostsDetailsHandler(tornado.web.RequestHandler):
         - Posts
         summary: Delete posts
         description: Remove posts from feed
-        produces:
-        - application/json
         parameters:
         -   name: posts_id
             in: path
